@@ -11,7 +11,7 @@ library(data.table)
 
 #subset clusters, save normalized counts and metadata for DEG analysis
 
-load("UMAP_2000_64_04.RData")
+load("processing_qc/UMAP_2000_64_04.RData")
 for(test.cluster in unique(hippo.combined@meta.data$seurat_clusters)){
 	cluster<-subset(x=hippo.com, idents=test.cluster);
 	cluster <- NormalizeData(object = cluster);
