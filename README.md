@@ -3,11 +3,15 @@ Hippocampus Axis data analysis
 
 This repository contains analysis code for the Hippocampus Axis scRNA-seq project carried out by researchers at the [Konopka Lab, UTSW](http://konopkalab.org/).
 
-## Citation
+## Cite this
 
 If you use anything in this repository please cite the following publication:
 
 Pre-print URL: 
+
+## Study design
+
+*Must Do
 
 ## Files
 
