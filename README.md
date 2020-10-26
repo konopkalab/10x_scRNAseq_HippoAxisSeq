@@ -27,7 +27,7 @@ We have provided an interactive web app that allow you to explore the data at si
 
 * https://human-hippo-axis.cells.ucsc.edu/
 
-* Own shiny app
+* Shiny app by iSEE (https://bioconductor.org/packages/release/bioc/html/iSEE.html)
 
 ![](HippoAxisSeq.gif)]
 
