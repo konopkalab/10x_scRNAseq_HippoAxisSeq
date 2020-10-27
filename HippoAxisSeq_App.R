@@ -7,6 +7,7 @@ library("scater")
 
 
 # Download the data from here: "https://www.dropbox.com/s/6j0wroa41hnr5m9/HippoAxis.rds?dl=1"
+# The data is ~700mb. 
 sce <- readRDS("HippoAxis.rds")
 sce <- scater::addPerCellQC(sce)
 sce <- scater::addPerFeatureQC(sce,BPPARAM = SerialParam())
