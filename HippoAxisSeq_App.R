@@ -11,23 +11,6 @@ sce <- readRDS("HippoAxis.rds")
 sce <- scater::addPerCellQC(sce)
 sce <- scater::addPerFeatureQC(sce,BPPARAM = SerialParam())
 
-# Add info about % of expressed per cell
-splitit <- function(x) split(seq(along=x),x)
-cellType.idx <- splitit(colData(sce)[["Cell"]])
-    rowdat.sce <- rowData(sce)
-    for(i in names(cellType.idx)){
-        message(Sys.time(), " computing propNucleiExprs for ", i)
-        rowdat.sce[, paste0("propExprsIn.", i)] <- apply(
-            assay(sce, "counts")[, cellType.idx[[i]]],
-            1,
-            function(x){
-                mean(x != 0)
-            }
-        )
-    }
-
-rowData(sce) <- rowdat.sce
-
 ################### 
 # Add information #
 ###################
@@ -55,6 +38,24 @@ temporary <- colData(sce) %>%
 
 colData(sce) <- temporary
 
+# Add info about % of expressed per cell
+splitit <- function(x) split(seq(along=x),x)
+cellType.idx <- splitit(colData(sce)[["Cell"]])
+    rowdat.sce <- rowData(sce)
+    for(i in names(cellType.idx)){
+        message(Sys.time(), " computing propNucleiExprs for ", i)
+        rowdat.sce[, paste0("propExprsIn.", i)] <- apply(
+            assay(sce, "counts")[, cellType.idx[[i]]],
+            1,
+            function(x){
+                mean(x != 0)
+            }
+        )
+    }
+
+rowData(sce) <- rowdat.sce
+
+# Initialize the iSEE app.
 
 initial <- list()
 
