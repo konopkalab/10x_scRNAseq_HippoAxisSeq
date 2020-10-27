@@ -20,6 +20,7 @@ Pre-print URL:
 | [`processing_qc`](processing_qc/) | Output data from initial processing and quality check. | 01_Data_processing_QC.R |
 | [`DGE`](DGE/) | Output data from DGE analysis. | 02_DGE_Analysis.R |
 | [`MAGMA`](MAGMA/) | Output data from MAGMA gene set analysis. | 03_MAGMA.sh |
+| [`Shiny_App`](Shiny_App/) | Input data to visualize the data. | HippoAxisSeq_App.R |
 
 ## Explore the data
 
@@ -27,7 +28,7 @@ We have provided an interactive web app that allow you to explore the data at si
 
 * https://human-hippo-axis.cells.ucsc.edu/
 
-* Shiny app by iSEE (https://bioconductor.org/packages/release/bioc/html/iSEE.html)
+* Shiny app (Please download the data and build it using the HippoAxisSeq_App.R code).
 
 ![](HippoAxisSeq.gif)]
 
