@@ -6,55 +6,9 @@ library("BiocParallel")
 library("scater")
 
 
-# Download the data from here: "https://www.dropbox.com/s/6j0wroa41hnr5m9/HippoAxis.rds?dl=1"
-# The data is ~700mb. 
-sce <- readRDS("HippoAxis.rds")
-sce <- scater::addPerCellQC(sce)
-sce <- scater::addPerFeatureQC(sce,BPPARAM = SerialParam())
-
-################### 
-# Add information #
-###################
-temporary <- colData(sce) %>%
-				as.data.frame() %>%
-                rownames_to_column("TMP") %>%
-                #select(TMP,orig.ident,nCount_RNA,nFeature_RNA, percent.mt, group, age, sex,dur,batch, donor,ident) %>%
-                mutate(ident = as.character(ident)) %>%
-                mutate(ident = if_else(ident == "29", "CApyr2",ident)) %>%
-                mutate(Cell = as.factor(ident)) %>%
-                mutate(Class = case_when(grepl("CA|Den", Cell) ~ "Glutamatergic", 
-                        grepl("In", Cell) ~ "Gabaergic",
-                        grepl("Astro|Olig|OPC|Endo|Micro", Cell) ~ "NonNeuronal")) %>%
-                mutate(Definition = case_when(grepl("CA", Cell) ~ "CA.Neurons",
-                		grepl("Den", Cell) ~ "GranuleN",
-                        grepl("In", Cell) ~ "Inhibitory",
-                        grepl("Astro", Cell) ~ "Astrocytes", 
-                        grepl("Olig", Cell) ~ "Oligodendrocytes",
-                        grepl("OPC", Cell) ~ "OPC",
-                        grepl("Micro", Cell) ~ "Microglia",
-                        grepl("Endo", Cell) ~ "Endothelial")) %>%
-                rename(Axis = group) %>%
-                column_to_rownames("TMP") %>% 
-                DataFrame()
-
-colData(sce) <- temporary
-
-# Add info about % of expressed per cell
-splitit <- function(x) split(seq(along=x),x)
-cellType.idx <- splitit(colData(sce)[["Cell"]])
-    rowdat.sce <- rowData(sce)
-    for(i in names(cellType.idx)){
-        message(Sys.time(), " computing propNucleiExprs for ", i)
-        rowdat.sce[, paste0("propExprsIn.", i)] <- apply(
-            assay(sce, "counts")[, cellType.idx[[i]]],
-            1,
-            function(x){
-                mean(x != 0)
-            }
-        )
-    }
-
-rowData(sce) <- rowdat.sce
+# Download the data from here: "https://www.dropbox.com/s/a8duxkhcd5zig0v/HippoAxis_Filt_iSEE.rds?dl=0"
+# The data is ~500mb. 
+sce <- readRDS("HippoAxis_Filt_iSEE.rds")
 
 # Initialize the iSEE app.
 
