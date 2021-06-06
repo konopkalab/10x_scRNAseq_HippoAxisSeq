@@ -7,11 +7,7 @@ This repository contains analysis code for the Hippocampus Axis scRNA-seq projec
 
 If you use anything in this repository please cite the following publication:
 
-Pre-print URL: 
-
-## Study design
-
-*Must Do
+Paper: https://www.cell.com/neuron/fulltext/S0896-6273(21)00329-9
 
 ## Files
 
